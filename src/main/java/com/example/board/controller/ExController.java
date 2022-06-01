@@ -1,18 +1,18 @@
 package com.example.board.controller;
 
 import com.example.board.auth.MyUserDetail;
+import com.example.board.entity.Role;
+import com.example.board.entity.User;
+import com.example.board.service.ExService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.example.board.entity.User;
-import com.example.board.service.ExService;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Arrays;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,7 +38,8 @@ public class ExController {
     public String signUp(User user) {
         System.out.println("hellllllllll");
         System.out.println(user);
-        user.setRole("USER");
+//        user.setRole("USER");
+        user.setRole(Role.USER);
         System.out.println("22222");
         service.joinUser(user);
         System.out.println("3333333");

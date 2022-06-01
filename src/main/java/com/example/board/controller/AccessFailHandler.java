@@ -1,15 +1,14 @@
 package com.example.board.controller;
 
-import java.io.IOException;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.stereotype.Service;
+import java.io.IOException;
 
 @Service("accessFailHandler")
 public class AccessFailHandler implements AccessDeniedHandler{

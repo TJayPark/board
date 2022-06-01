@@ -1,12 +1,11 @@
 package com.example.board.repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-
-import org.springframework.stereotype.Repository;
-
 import com.example.board.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 @Repository
 @RequiredArgsConstructor

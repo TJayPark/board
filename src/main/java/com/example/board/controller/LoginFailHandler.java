@@ -1,21 +1,15 @@
 package com.example.board.controller;
 
-import java.io.IOException;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.authentication.AccountExpiredException;
-import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.CredentialsExpiredException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.LockedException;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.stereotype.Service;
+import java.io.IOException;
 
 @Service("loginFailHandler")
 public class LoginFailHandler implements AuthenticationFailureHandler{
