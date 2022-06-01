@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+### yml ###
+*.yml
+*.yml.*
+### properties ###
+application-oauth2.properties
