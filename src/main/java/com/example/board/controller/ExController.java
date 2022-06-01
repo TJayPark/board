@@ -1,9 +1,11 @@
 package com.example.board.controller;
 
 import com.example.board.auth.MyUserDetail;
+import com.example.board.auth.dto.SessionUser;
 import com.example.board.entity.Role;
 import com.example.board.entity.User;
 import com.example.board.service.ExService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -12,12 +14,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class ExController {
+
+    private final HttpSession httpSession;
+
+
     private final ExService service;
 
     /**
@@ -62,6 +69,18 @@ public class ExController {
             model.addAttribute("info", userDetail.getUsername());      //유저 이메일
             return "redirect:/board/list";
         }
+
+    }
+
+    @GetMapping("/login/social")
+    public String social(Model model, @LoginUser SessionUser user) {
+        if(user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userImg", user.getPicture());
+
+        }
+
+        return "social";
 
     }
 }
