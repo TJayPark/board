@@ -31,9 +31,10 @@ public class User extends TimeEntity {
     private Role role;
 
     @Builder
-    public User(String name, String email, String picture,Role role) {
+    public User(String name, String email, String password, String picture,Role role) {
         this.name = name;
         this.email = email;
+        this.password = password;
         this.picture = picture;
         this.role = role;
     }

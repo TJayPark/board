@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +45,7 @@ public class BoardController {
                             @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                             String searchKeyword,
                             Authentication authentication){
+        System.out.println("1cin==");
         Page<Board> list = null;
         if(searchKeyword == null){
             list = boardService.boardList(pageable);
@@ -62,8 +64,10 @@ public class BoardController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         //Authentication 객체를 통해 유저 정보를 가져올 수 있다.
-        MyUserDetail userDetail = (MyUserDetail)authentication.getPrincipal();  //userDetail 객체를 가져옴
-        model.addAttribute("info", userDetail.getUsername());      //유저 이메일
+        //MyUserDetail userDetail = (MyUserDetail)authentication.getPrincipal();  //userDetail 객체를 가져옴
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        String userName = oAuth2User.getAttribute("name");
+        model.addAttribute("info", userName);      //유저 이메일
         return "boardlist";
     }
 
