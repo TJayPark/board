@@ -43,3 +43,5 @@ out/
 ### properties ###
 !**/src/main/**/application-oauth2.properties
 !**/src/main/**/*.properties
+
+/src/main/resources/application-oauth2.properties
