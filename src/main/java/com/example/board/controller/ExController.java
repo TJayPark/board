@@ -90,6 +90,17 @@ public class ExController {
 
     }
 
+    @GetMapping("/login")
+    public String getLoginPage(Model model, @LoginUser SessionUser user) throws Exception {
+        System.out.println("login==========test=======");
+        if(user != null) {
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userImg", user.getPicture());
+        }
+
+        return "login";
+    }
+
     @GetMapping("/login/social")
     public String social(Model model, @LoginUser SessionUser user) {
         if(user != null) {
@@ -98,7 +109,7 @@ public class ExController {
 
         }
 
-        return "social";
+        return "login";
 
     }
 }
