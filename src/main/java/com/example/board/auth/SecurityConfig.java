@@ -55,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/userAccess").hasRole("USER")
+                    .antMatchers("/userAccess").hasRole("SOCIAL")
                     .antMatchers("/signUp").anonymous()
                     .antMatchers(
                         "/error",
@@ -71,6 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/test/**")
                         .permitAll() // 회원이 아닌 사람도 확인 가능한 페이지 설정
                     .antMatchers("/board/**").hasRole(Role.USER.name()) // USER role 가진 사람만 확인 가능한 페이지
+                    .antMatchers("/board/**").hasRole(Role.SOCIAL.name()) // USER role 가진 사람만 확인 가능한 페이지
                     .anyRequest().authenticated()
                 .and()
                     .logout().logoutSuccessUrl("/")

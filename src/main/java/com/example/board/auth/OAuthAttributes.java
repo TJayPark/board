@@ -12,6 +12,7 @@ public class OAuthAttributes {
     private Map<String, Object> attributes;
     private String nameAttributeKey, name, email, picture, password;
 
+
     @Builder
     public OAuthAttributes(Map<String, Object> attributes,
                            String nameAttributeKey,
@@ -27,7 +28,40 @@ public class OAuthAttributes {
     public static OAuthAttributes of(String registrationId,
                                      String userNameAttributeName,
                                      Map<String, Object> attributes, String password) {
+        if ("naver".equals(registrationId)) {
+            return ofNaver("id", attributes);
+        }
+        else if ("kakao".equals(registrationId)) {
+            return ofKakao("id", attributes);
+        }
+
         return ofGoogle(userNameAttributeName, attributes, password);
+    }
+
+    public static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
+        System.out.println(attributes);
+        Map<String,Object> response = (Map<String, Object>) attributes.get("kakao_account");
+        Map<String, Object> profile = (Map<String, Object>) response.get("profile");
+        return OAuthAttributes.builder()
+                .name((String) profile.get("nickname"))
+                .email((String) response.get("email"))
+                .picture((String) profile.get("profile_image_url"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
+    public static OAuthAttributes ofNaver(String userNameAttributesNmae, Map<String, Object> attributes) {
+        /*JSON 형태이기 때문에 Map을 통해 데이터를 가져온다. */
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+
+        return OAuthAttributes.builder()
+                .name((String) response.get("name"))
+                .email((String) response.get("email"))
+                .picture((String) response.get("profile_image"))
+                .attributes(response)
+                .nameAttributeKey(userNameAttributesNmae)
+                .build();
     }
 
     public  static OAuthAttributes ofGoogle(String userNameAttributeName,
@@ -48,7 +82,7 @@ public class OAuthAttributes {
                 .email(email)
                 .password(password)
                 .picture(picture)
-                .role(Role.USER)
+                .role(Role.SOCIAL)
                 .build();
     }
 }

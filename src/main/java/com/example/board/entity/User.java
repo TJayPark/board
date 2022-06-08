@@ -23,7 +23,8 @@ public class User extends TimeEntity {
     @Column(length = 100)
     private String password;
 
-    @Column String picture;
+    @Column
+    private String picture;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
